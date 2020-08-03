@@ -5,9 +5,9 @@
 #include <GL/freeglut.h>
 #include "./utils.h"
 #include <string>
-#include "./bmploader.h"
 #include <stdio.h>
 #include "vertex.h"
+#include "TGA.h"
 
 using namespace std;
 

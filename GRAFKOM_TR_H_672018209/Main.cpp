@@ -2,6 +2,9 @@
 #include <GL/freeglut.h>
 #include <math.h>
 #include <Windows.h>
+#include "TGA.h"
+#include "object.h"
+
 
 
 
