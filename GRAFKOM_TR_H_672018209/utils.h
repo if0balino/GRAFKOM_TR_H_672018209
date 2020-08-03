@@ -18,7 +18,6 @@ struct vec2 {
 vec2 getUV(string str);
 vec3 getPos(string line);
 vector<int> getIndices(string line);
-<<<<<<< HEAD
 
 vector<vec2> getUvs(vector<string> file) {
 	vector<vec2> uvs;
@@ -32,7 +31,6 @@ vector<vec2> getUvs(vector<string> file) {
 	return uvs;
 }
 
-=======
 
 vector<vec2> getUvs(vector<string> file) {
 	vector<vec2> uvs;
@@ -46,7 +44,6 @@ vector<vec2> getUvs(vector<string> file) {
 	return uvs;
 }
 
->>>>>>> a392a209b71c266dc51dd1a379afb184ef31c4ca
 vector<string> importFile(string fileName) {
 	vector <string> vertex;
 
@@ -59,7 +56,7 @@ vector<string> importFile(string fileName) {
 	return vertex;
 }
 
-void getFile(string filename, /*out*/ ifstream& file)
+void getFile(string filename, ifstream& file)
 {
 	file.open(filename.c_str());
 }
@@ -91,8 +88,6 @@ vector<vector<int>> getFaces(const char * filename, FILE * nfgFile) {
 	return faces;
 }
 
-<<<<<<< HEAD
-=======
 vector<Vertex> getVertices(const char * filename, FILE* nfgFile) {
 	vector <Vertex> vertices;
 	//FILE* nfgFile;
@@ -138,7 +133,6 @@ vector<Vertex> getVertices(const char * filename, FILE* nfgFile) {
 	 return vertices;
  }
 
->>>>>>> a392a209b71c266dc51dd1a379afb184ef31c4ca
  vector <vector<int>> getFaces(vector<string> file) {
 	 vector <vector<int>> indices;
 	 int a = stoi(file.at(0).replace(file.at(0).find("NrVertices:"), sizeof("NrVertices:") - 1, "")) + 2;
