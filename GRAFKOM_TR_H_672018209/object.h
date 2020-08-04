@@ -13,19 +13,16 @@ using namespace std;
 
 class Object {
 private:
-	GLuint iboId;
-	Tga tga;
 	vector <Vertex> vertices;
 	std::vector <vec3> indices;
 	std::vector <std::vector<int>> faces;
-	std::vector <vec2> uvs;
 	GLuint texture;
 	//std::vector <std::tuple<int, int, int>> faces;
 	vec3 position;
 	vec3 rotation;
 	float rot = 0.0f;
 public:
-	Object() {
+	Object(){
 	
 	}
 	void setup(const char * fileLocation, const char* textureLocation) {

@@ -2,14 +2,11 @@
 #include <GL/freeglut.h>
 #include <math.h>
 #include <Windows.h>
-<<<<<<< HEAD
-#include "TGA.h"
-#include "object.h"
 
-=======
+
+
 #include <vector>
 #include "object.h"
->>>>>>> 82816fbe79487a0eb9107eb39185370cc3fd76f2
 
 
 Object woman;
@@ -74,8 +71,6 @@ void mouseMotion(int x, int y) {
         xrot = y + ydiff;
 
         glLoadIdentity();
-		
-
         glRotatef(xrot, 1.0, 0.0, 0.0);
         glRotatef(yrot, 0.0, 1.0, 0.0);
         glutPostRedisplay();
@@ -171,20 +166,56 @@ void display() {
     else
         glClear(GL_COLOR_BUFFER_BIT);
 
+    glBegin(GL_POLYGON); //alas
+    glColor3f(0.0, 1.0, 0.0);
+    glVertex3f(-1.0, 0.0,-1.0);
+    glVertex3f(1.0, 0.0, -1.0);
+    glVertex3f(1.0, 0.0, 1.0);
+    glVertex3f(-1.0, 0.0, 1.0);
+    glEnd();
+
     glBegin(GL_POLYGON);
-    glColor3f(0.0, 0.0, 0.0);
-    glVertex3f(-2.0, 0.0,-2.0);
-    glVertex3f(2.0, 0.0, -2.0);
-    glVertex3f(2.0, 0.0, 2.0);
-    glVertex3f(-2.0, 0.0, 2.0);
+    glColor3f(1.0, 0.0, 0.0);  //belakang
+    glVertex3f(-1.0, -1.0, -1.0);
+    glVertex3f(1.0, -1.0, -1.0);
+    glVertex3f(1.0, 0.0, -1.0);
+    glVertex3f(-1.0, 0.0, -1.0);
+    glEnd();
+
+    glBegin(GL_POLYGON);  //depan
+    glColor3f(1.0, 1.0, 0.0);
+    glVertex3f(-1.0, -1.0, 1.0);
+    glVertex3f(1.0, -1.0, 1.0);
+    glVertex3f(1.0, 0.0, 1.0);
+    glVertex3f(-1.0, 0.0, 1.0);
+    glEnd();
+
+    glBegin(GL_POLYGON); //kanan
+    glColor3f(0.0, 1.0, 1.0);
+    glVertex3f(1.0, -1.0, -1.0);
+    glVertex3f(1.0, -1.0, 1.0);
+    glVertex3f(1.0, 0.0, 1.0);
+    glVertex3f(1.0, 0.0, -1.0);
+    glEnd();
+
+    glBegin(GL_POLYGON); //kiri
+    glColor3f(0.0, 0.0, 1.0);
+    glVertex3f(-1.0, -1.0, -1.0);
+    glVertex3f(-1.0, -1.0, 1.0);
+    glVertex3f(-1.0, 0.0, 1.0);
+    glVertex3f(-1.0, 0.0, -1.0);
     glEnd();
 	
-	woman.draw();
+    glPushMatrix();
+    glBegin(GL_POLYGON);
+    glTranslatef(0, 0, 0);
+    glEnd();
+    glPopMatrix();
 
+	woman.draw();
     glPushMatrix();
     glPopMatrix();
     glutSwapBuffers();
-    //glTranslatef(-0.003, 0.0, 0.0);
     posX -= 0.003;
 
 }

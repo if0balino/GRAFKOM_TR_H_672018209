@@ -1,4 +1,3 @@
-//#include "utils.h"
 #pragma once
 struct vec3 {
 	double x;

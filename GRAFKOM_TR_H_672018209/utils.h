@@ -9,8 +9,6 @@
 using namespace std;
 
 
-
-
 struct vec2 {
 	double x;
 	double y;
@@ -19,18 +17,6 @@ vec2 getUV(string str);
 vec3 getPos(string line);
 vector<int> getIndices(string line);
 
-vector<vec2> getUvs(vector<string> file) {
-	vector<vec2> uvs;
-	int n = stoi(file.at(0).replace(file.at(0).find("NrVertices:"), sizeof("NrVertices:") - 1, ""));
-	cout << "total vertices: " << n << endl;
-	for (int i = 1; i <= n; i++) {
-		uvs.push_back(getUV(file.at(i)));
-	}
-	cout << "size uvs: " << uvs.size() << endl;
-	
-	return uvs;
-}
-
 
 vector<vec2> getUvs(vector<string> file) {
 	vector<vec2> uvs;
@@ -43,10 +29,10 @@ vector<vec2> getUvs(vector<string> file) {
 	
 	return uvs;
 }
+
 
 vector<string> importFile(string fileName) {
 	vector <string> vertex;
-
 	ifstream file(fileName);
 	string str;
 	while (getline(file, str)) {
@@ -56,19 +42,19 @@ vector<string> importFile(string fileName) {
 	return vertex;
 }
 
+
 void getFile(string filename, ifstream& file)
 {
 	file.open(filename.c_str());
 }
 
+
 vector<vector<int>> getFaces(const char * filename, FILE * nfgFile) {
+
 	vector<vector<int>> faces;
-	
-	
 	int numindices = 0;
 	int numvertices = 0;
 	int index;
-	//fopen_s(&nfgFile, filename, "r");
 	
 	fscanf_s(nfgFile, "NrIndices: %d\n", &numindices);
 	
@@ -85,19 +71,21 @@ vector<vector<int>> getFaces(const char * filename, FILE * nfgFile) {
 		faces.push_back(f);
 	}
 	cout << "faces size: " << faces.size() << endl;
+
 	return faces;
 }
 
+
 vector<Vertex> getVertices(const char * filename, FILE* nfgFile) {
+
 	vector <Vertex> vertices;
-	//FILE* nfgFile;
 	int numvertices = 0;
 	fscanf_s(nfgFile, "NrVertices: %d\n", &numvertices);
 	int index;
+
 	for (int i = 0; i < numvertices; i++) {
 		Vertex vertex;
 		float x;
-		//"   $d. pos:[%lf, 1.020300, -0.083900]; norm:[0.662725, 0.317712, -0.678126]; binorm:[0.014559, 0.899903, 0.435847]; tgt:[-0.748721, 0.298719, -0.591763]; uv:[0.611900, 0.886700];"
 		fscanf_s(nfgFile, "   %d. pos:[%lf, %lf, %lf]; norm:[%lf, %lf, %lf]; binorm:[%lf, %lf, %lf]; tgt:[%lf, %lf, %lf]; uv:[%lf, %lf];\n",
 			&index,
 			&vertex.pos.x,
@@ -115,23 +103,29 @@ vector<Vertex> getVertices(const char * filename, FILE* nfgFile) {
 			&vertex.uv.x,
 			&vertex.uv.y
 			);
-		//cout << vertex.uv.x << " " << vertex.uv.y << endl;
 		vertices.push_back(vertex);
 	}
+
 	return vertices;
 }
 
+
  vector <vec3> getVertices(vector<string> file) {
+
 	 vector <vec3> vertices;
 	 int n = stoi(file.at(0).replace(file.at(0).find("NrVertices:"), sizeof("NrVertices:") - 1, ""));
 	 cout << "total vertices: " << n << endl;
+
 	 for (int i = 1; i <= n; i++) {
 		 vertices.push_back(getPos(file.at(i)));
 	 }
+
 	 cout << "size vertices: " << vertices.size() << endl;
 	 cout << "end";
+
 	 return vertices;
  }
+
 
  vector <vector<int>> getFaces(vector<string> file) {
 	 vector <vector<int>> indices;
@@ -145,13 +139,13 @@ vector<Vertex> getVertices(const char * filename, FILE* nfgFile) {
 	 return indices;
  }
 
+
  vector<int> getIndices(string line) {
+
 	 vector <int> verIndex;
 	 int index = 0;
-
 	 line.erase(remove_if(line.begin(), line.end(), ::isspace), line.end());
 
-	 
 	 string temp = "";
 	 bool begin = false;
 
@@ -172,14 +166,14 @@ vector<Vertex> getVertices(const char * filename, FILE* nfgFile) {
 			 else {
 				 temp += line[i];
 			 }
-		 }
-		 
+		 }	 
 	 }
 	 
 	 verIndex.push_back(stoi(temp));
 	 
 	 return verIndex;
  }
+
 
  vec3 getPos(string str) {
 	 vec3 vertices;
@@ -192,7 +186,6 @@ vector<Vertex> getVertices(const char * filename, FILE* nfgFile) {
 	 vertices.x = 0.00;
 	 vertices.y = 0.00;
 	 vertices.z = 0.00;
-	 //return vertices;
 	 double v[3];
 	
 	string temp = "";
@@ -211,8 +204,10 @@ vector<Vertex> getVertices(const char * filename, FILE* nfgFile) {
 	 vertices.x = v[0];
 	 vertices.y = v[1];
 	 vertices.z = v[2];
+
 	 return vertices;
  }
+
 
  vec2 getUV(string str) {
 	 vec2 vertices;
@@ -224,7 +219,6 @@ vector<Vertex> getVertices(const char * filename, FILE* nfgFile) {
 	 string d = "";
 	 vertices.x = 0.00;
 	 vertices.y = 0.00;
-	 //return vertices;
 	 double v[2];
 
 	 string temp = "";

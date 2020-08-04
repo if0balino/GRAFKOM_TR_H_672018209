@@ -1,5 +1,6 @@
 #include <vector>
 #include <fstream>
+#include <iostream>
 
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
