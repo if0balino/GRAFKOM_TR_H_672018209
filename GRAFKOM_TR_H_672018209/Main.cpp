@@ -257,7 +257,7 @@ void ukuran(int lebar, int tinggi) {
 
 void update(int value) {
     glRotatef(-1.0, 0.0, 1.0, 0.0);
-    rotx += 1.0;
+    rotx += -1.0;
     //if (rotx > 0 ) {
       //  rotx -= 0;
     //}
