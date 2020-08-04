@@ -2,9 +2,6 @@
 #include <GL/freeglut.h>
 #include <math.h>
 #include <Windows.h>
-
-
-
 #include <vector>
 #include "object.h"
 
@@ -17,6 +14,7 @@ void ukuran(int, int);
 void mouse(int button, int state, int x, int y);
 void mouseMotion(int x, int y);
 void keyboard(unsigned char, int, int);
+void update(int value);
 
 float rotx = 0.0f;
 float xrot = 0.0f;
@@ -174,6 +172,14 @@ void display() {
     glVertex3f(-1.0, 0.0, 1.0);
     glEnd();
 
+    glBegin(GL_POLYGON); //alas bawah
+    glColor3f(1.0, 0.0, 1.0);
+    glVertex3f(-1.0, -1.0, -1.0);
+    glVertex3f(1.0, -1.0, -1.0);
+    glVertex3f(1.0, -1.0, 1.0);
+    glVertex3f(-1.0, -1.0, 1.0);
+    glEnd();
+
     glBegin(GL_POLYGON);
     glColor3f(1.0, 0.0, 0.0);  //belakang
     glVertex3f(-1.0, -1.0, -1.0);
@@ -208,7 +214,7 @@ void display() {
 	
     glPushMatrix();
     glBegin(GL_POLYGON);
-    glTranslatef(0, 0, 0);
+    glTranslatef(0.0, 0.0, 0.0);
     glEnd();
     glPopMatrix();
 
@@ -232,6 +238,8 @@ void idle() {
     glutPostRedisplay();
 }
 
+
+
 void ukuran(int lebar, int tinggi) {
     if (tinggi == 0) tinggi = 1;
 
@@ -242,6 +250,19 @@ void ukuran(int lebar, int tinggi) {
 	
     glTranslatef(0.0, -1.0, -3.0);
     glMatrixMode(GL_MODELVIEW);
+}
+
+
+
+
+void update(int value) {
+    glRotatef(-1.0, 0.0, 1.0, 0.0);
+    rotx += 1.0;
+    //if (rotx > 0 ) {
+      //  rotx -= 0;
+    //}
+    glutPostRedisplay();
+    glutTimerFunc(25, update, 0);
 }
 
 
@@ -264,7 +285,7 @@ int main(int argc, char** argv) {
     glLineWidth(1);
     is_depth = 1;
     glLoadIdentity();
-	gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f); //mengatur penglihatan objek
+	gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 	glTranslatef(0.0, 0.2, 0.0);
     //initcahaya();
     glutDisplayFunc(display);
@@ -274,7 +295,7 @@ int main(int argc, char** argv) {
     glutSpecialFunc(onSpecialKeyPressed);
     glutReshapeFunc(ukuran);
     glutIdleFunc(display);
-		
+    glutTimerFunc(25, update, 0);
     glutMainLoop();
     return 0;
 }
