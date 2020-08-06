@@ -26,11 +26,11 @@ public:
 	
 	}
 	void setup(const char * fileLocation, const char* textureLocation) {
-		Tga info = Tga("Woman1.tga");
+		Tga tga = Tga("Woman1.tga");
 		GLuint texture = 0;
 		glGenTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);
-		glTexImage2D(GL_TEXTURE_2D, 0, info.HasAlphaChannel() ? GL_RGBA : GL_RGB, info.GetWidth(), info.GetWidth(), 0, info.HasAlphaChannel() ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, info.GetPixels().data());
+		glTexImage2D(GL_TEXTURE_2D, 0, tga.HasAlphaChannel() ? GL_RGB : GL_RGB, tga.GetWidth(), tga.GetWidth(), 0, tga.HasAlphaChannel() ? GL_RGBA : GL_BGR_EXT, GL_UNSIGNED_BYTE, tga.GetPixels().data());
 		//vector <string> nfg = importFile(fileLocation);
 		FILE* nfgFile;
 		fopen_s(&nfgFile, fileLocation, "r");

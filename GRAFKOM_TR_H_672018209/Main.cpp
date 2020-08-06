@@ -32,7 +32,7 @@ void initcahaya(void)
     GLfloat mat_ambient[] = { 1.0, 1.0, 1.0, 0.0 };
     GLfloat mat_diffuse[] = { 1.0, 1.0, 1.0, 0.0 };
     GLfloat mat_specular[] = { 0.0, 1.0, 0.0, 0.0 };
-    GLfloat mat_shininess[] = { 50.0 };
+    GLfloat mat_shininess[] = { 150.0 };
     GLfloat light_position[] = { 1.0, 0.0, 1.0, 0.0 };
 
     glShadeModel(GL_SMOOTH);
@@ -118,16 +118,7 @@ void keyboard(unsigned char key, int x, int y) {
     case 'M': //putar kekanan
         glRotatef(-1.0, 0.0, 0.0, 1.0);
         break;
-    case 'p':
-    case 'P':
-        if (is_depth) {
-            is_depth = 0;
-            glDisable(GL_DEPTH_TEST);
-        }
-        else {
-            is_depth = 1;
-            glEnable(GL_DEPTH_TEST);
-        }
+  
     }
     std::cout << "rotx: " << rotx << std::endl;
     display();
@@ -163,9 +154,9 @@ void display() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     else
         glClear(GL_COLOR_BUFFER_BIT);
-
+    glEnable(GL_DEPTH_TEST);
     glBegin(GL_POLYGON); //alas
-    glColor3f(0.0, 1.0, 0.0);
+    glColor3f(0.8, 0.8, 0.8);
     glVertex3f(-1.0, 0.0,-1.0);
     glVertex3f(1.0, 0.0, -1.0);
     glVertex3f(1.0, 0.0, 1.0);
@@ -211,7 +202,6 @@ void display() {
     glVertex3f(-1.0, 0.0, 1.0);
     glVertex3f(-1.0, 0.0, -1.0);
     glEnd();
-	
     glPushMatrix();
     glBegin(GL_POLYGON);
     glTranslatef(0.0, 0.0, 0.0);
@@ -287,7 +277,7 @@ int main(int argc, char** argv) {
     glLoadIdentity();
 	gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 	glTranslatef(0.0, 0.2, 0.0);
-    //initcahaya();
+    initcahaya();
     glutDisplayFunc(display);
     glutMouseFunc(mouse);
     glutMotionFunc(mouseMotion);

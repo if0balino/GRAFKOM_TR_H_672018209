@@ -48,7 +48,7 @@ Tga::Tga(const char* FilePath)
     static std::uint8_t IsCompressed[12] = { 0x0, 0x0, 0xA, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 };
 
     hFile.read(reinterpret_cast<char*>(&Header), sizeof(Header));
-
+    //tidak di kompres
     if (!std::memcmp(DeCompressed, &Header, sizeof(DeCompressed)))
     {
         BitsPerPixel = Header[16];
@@ -66,6 +66,7 @@ Tga::Tga(const char* FilePath)
         ImageCompressed = false;
         hFile.read(reinterpret_cast<char*>(ImageData.data()), size);
     }
+    //sudah di kompres
     else if (!std::memcmp(IsCompressed, &Header, sizeof(IsCompressed)))
     {
         BitsPerPixel = Header[16];
@@ -78,7 +79,7 @@ Tga::Tga(const char* FilePath)
             hFile.close();
             throw std::invalid_argument("Invalid File Format. Required: 24 or 32 Bit Image.");
         }
-
+        //dekompres
         PixelInfo Pixel = { 0 };
         int CurrentByte = 0;
         std::size_t CurrentPixel = 0;
