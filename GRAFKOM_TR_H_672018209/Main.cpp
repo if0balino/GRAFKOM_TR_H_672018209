@@ -33,7 +33,7 @@ void initcahaya(void)
     GLfloat mat_diffuse[] = { 1.0, 1.0, 1.0, 0.0 };
     GLfloat mat_specular[] = { 0.0, 1.0, 0.0, 0.0 };
     GLfloat mat_shininess[] = { 150.0 };
-    GLfloat light_position[] = { 1.0, 0.0, 1.0, 0.0 };
+    GLfloat light_position[] = { 0.0, 0.0, 1.0, 0.0 };
 
     glShadeModel(GL_SMOOTH);
     glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
